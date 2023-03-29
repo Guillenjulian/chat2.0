@@ -1,5 +1,5 @@
 import { dataBase } from "./db";
-import { map } from "lodash/map";
+import { map } from "lodash";
 const API_BASE_URL = "http://localhost:3000";
 
 const state = {
@@ -7,7 +7,6 @@ const state = {
     rtdbRoomId: "",
     name: "",
     email: "",
-
     userId: "",
     roomId: "",
     messages: [],
@@ -124,10 +123,10 @@ const state = {
       console.error("no hay un Email en el state");
     }
   },
-  askNewRoom(userId: any) {
+  askNewRoom() {
     const currenstate = this.getState();
     if (currenstate.userId) {
-      fetch(API_BASE_URL + "/rooms", {
+      return fetch(API_BASE_URL + "/rooms", {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -146,7 +145,7 @@ const state = {
           const roomIdEl = currenstate.roomId;
           console.log("estes es el roomID", roomIdEl);
 
-          this.accesToRoom();
+          this.accessToRoom(roomIdEl);
 
           //  console.log("este es el currend desde el ask", currenstate);
         });
@@ -154,16 +153,17 @@ const state = {
       console.log("no hay user id");
     }
   },
+
   accessToRoom(roomId) {
     const currenstate = this.getState();
     const userId = currenstate.userId;
     // const roomId = currenstate.roomId;
 
-    fetch(API_BASE_URL + "/rooms/" + roomId + "?userId=" + userId, {})
+    return fetch(API_BASE_URL + "/rooms/" + roomId + "?userId=" + userId, {})
       .then((res) => res.json())
       .then((data) => {
-        console.log("id del room desdela api", data);
-        currenstate.rtdbRoomId = data.rtdbRoomId;
+        console.log("id del room desdela api", data.rtdrRoomID);
+        currenstate.rtdbRoomId = data.rtdrRoomID;
 
         this.setState(currenstate);
         this.listenRoom();
@@ -176,7 +176,7 @@ const state = {
     const nameFromState = currenstate.name;
     //console.log(nameFromState, "este es el pushmessage");
     const messageFromState = currenstate.messages;
-    //console.log(messageFromState);
+    console.log(messageFromState);
     const rtdbRoomIdFromState = currenstate.rtdbRoomId;
     console.log(rtdbRoomIdFromState, "este es desde menssages");
 
@@ -187,7 +187,7 @@ const state = {
       },
       body: JSON.stringify({
         name: nameFromState,
-        message: messageFromState,
+        message: messages,
         rtdbRoomId: currenstate.rtdbRoomId,
       }),
     }).then(() => this.listenRoom());

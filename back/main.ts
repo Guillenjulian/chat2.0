@@ -73,7 +73,7 @@ app.post("/rooms", (req, res) => {
         roomRef
           .set({
             messages: [],
-            owner: userId,
+            rtdbRoomId: userId,
           })
           .then(() => {
             const roomLongId = roomRef.key;
@@ -121,9 +121,10 @@ app.get("/rooms/:roomId", (req, res) => {
 });
 app.post("/messages", function (req, res) {
   const rtdbRoomId = req.body.rtdbRoomId;
+  console.log(rtdbRoomId);
 
   const chatRommsRef = rtdb.ref("/rooms/" + rtdbRoomId);
-  console.log(rtdbRoomId, "esto trae el cliente", req.body);
+  // console.log(rtdbRoomId, "esto trae el cliente", req.body);
 
   chatRommsRef.push(req.body, function (err) {
     console.log("Err");

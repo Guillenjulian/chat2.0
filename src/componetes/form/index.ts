@@ -1,5 +1,5 @@
 import { state } from "../../state";
-import { map } from "lodash";
+import { map } from "lodash/map";
 
 type Message = {
   name: string;
@@ -25,18 +25,18 @@ export class Header extends HTMLElement {
     });
     this.render();
   }
-  messages: Message[] = [];
   addLissteners() {
     const form = this.querySelector(".submit-message") as any;
     form.addEventListener("submit", (e: any) => {
       e.preventDefault();
       const target = e.target as any;
       state.pushManager(target["new-message"].value);
-      form.reset();
+
       // console.log(target["new-message"].value);
       this.render();
     });
   }
+  messages: Message[] = [];
   render() {
     const div = document.createElement("div");
     //console.log("Eeste mensasge", this.messages);
