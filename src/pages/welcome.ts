@@ -13,9 +13,9 @@ export class Welcome extends HTMLElement {
     div.innerHTML = `
     <div class="body">
     <header-element></header-element>
-    <title-chat></title-chat>
+   
+    <form-welcome></form-welcome>
 
-  <form-welcome></form-welcome>
     
     <footer-element></footer-element>
     </div>
@@ -23,7 +23,9 @@ export class Welcome extends HTMLElement {
       `;
     style.innerHTML = `
     .body{
-      
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
     .container-form{
     }

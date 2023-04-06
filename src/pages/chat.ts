@@ -1,4 +1,4 @@
-//import { state } from "../state";
+import { state } from "../state";
 
 import "../componetes/header";
 import "../componetes/footer";
@@ -15,6 +15,7 @@ export class ChatElement extends HTMLElement {
   render() {
     const div = document?.createElement("div");
     const style = document.createElement("style");
+
     div.innerHTML = `
     <div class="body">
     <header-element></header-element>

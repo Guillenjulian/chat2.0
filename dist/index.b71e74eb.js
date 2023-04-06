@@ -2948,9 +2948,9 @@ class Welcome extends HTMLElement {
         div.innerHTML = `
     <div class="body">
     <header-element></header-element>
-    <title-chat></title-chat>
+   
+    <form-welcome></form-welcome>
 
-  <form-welcome></form-welcome>
     
     <footer-element></footer-element>
     </div>
@@ -2958,7 +2958,9 @@ class Welcome extends HTMLElement {
       `;
         style.innerHTML = `
     .body{
-      
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
     .container-form{
     }
@@ -2973,7 +2975,6 @@ class Welcome extends HTMLElement {
 customElements.define("welcome-pages", Welcome);
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eKBYg":[function(require,module,exports) {
-//import { state } from "../state";
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ChatElement", ()=>ChatElement);
@@ -3094,77 +3095,55 @@ class Header extends HTMLElement {
     render() {
         const div = document.createElement("div");
         //console.log("Eeste mensasge", this.messages);
-        div.className = "container";
+        div.className = "contenedor";
         div.innerHTML = `
     <div class = "messages">
-  <h1> Esta es la sala ${(0, _state.state).data.roomId}</hi
-    <div>
+
+    
     ${this.messages.map((m)=>{
             let name = (0, _state.state).data.name;
             let userName = "";
             if (name === m.name) userName = "user";
             if (name !== m.name) userName = "otroUser";
-            return `  <div>
-        <li  class = "messages-container">
-        <div  class=" li_spam">${m.name}
-        </div>
-        
-        <div class ="${userName}">
-        <p> ${m.message}</p>
-        </div>
+            return `  
+        <div class ="li-container">
+        <spam class=" li_spam">${m.name} </spam>
+        <li  class ="${userName}">
+       <p>
+        ${m.message}
+       </p>
         
         </li>
+        
+        
+        </div>
         `;
         }).join("")}
-    </div>
+  
+
+      </div>
+      <div  >
       <form class= "submit-message">
-        <input class= "imput" type="text"  name="new-message"  ><br>
+      <input class= "imput" type="text"  name="new-message"  ><br>
       
-        <button class="button">Ingresar</button>
-        </form>
-        </div>
+      <button class="button">Ingresar</button>
+      </form>
+      
+      
+      </div>
+
       `;
         const style = document.createElement("style");
         style.innerHTML = `
 
-    .container {
+    .contenedor{
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 10px;
-      background-color: #f9f9f9;
+      flex-direction: column;
     }
-    
-    .messages {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      padding: 10px;
-      border-radius: 5px;
-      background-color: #ffffff;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-      height: 100%;
-      width:312px ;
-
-    }
-    
-    .message {
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 5px;
-      background-color: #d2f7c1;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    
-    .message strong {
-      font-weight: bold;
-    }
-    
+ 
     .submit-message {
-      height: 100%;
-
+      width: 150vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -3174,25 +3153,22 @@ class Header extends HTMLElement {
       padding: 10px;
       border-radius: 5px;
       background-color: #ffffff;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+      
     }
     
-    
-
     .imput {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
+      width: 74vh;
+      padding: 5px;
       border-radius: 5px;
       background-color: #fff;
       font-size: 14px;
       line-height: 1.5;
     }
     
+
     .button {
-      width: 100%;
+      width: 77vh;
       padding: 10px;
-      margin-bottom: 10px;
       border: none;
       border-radius: 5px;
       background-color: #0077cc;
@@ -3202,52 +3178,79 @@ class Header extends HTMLElement {
       cursor: pointer;
       transition: all 0.3s ease;
     }
+ 
     
-    @media (min-width: 768px) {
-      .container {
-        max-width: 768px;
-        margin: 0 auto;
-      }
+    .messages{
+      display: flex;
+      flex-direction: column;
+      border: solid 3px black;
+      width: 500px;
+      height: 250px;
+      margin: 10px;
+      margin-top: 10px;
+      overflow-y: scroll;
+      scroll-snap-align: end;
+  scroll-snap-type: y 
+      align-items: center; border-radius: 5px;
+      
     }
-    .messages-container{
+    
+      .li-container{
         display: flex;
         flex-direction: column;
-        height: 100%;
-        gap:7px;
+        border-radius: 100px 100px 100px 6px;
+        font-size: 17px;
+        list-style-type: none;
+        gap:10px;
+        margin:5px;
+        scroll-snap-align: end;
+        
       }
-    .messages-container strong{
-      font-weight: bold;
+  
+      .user {
+        background-color:#B9E97C ;
+        overflow: hidden;
+        border-radius: 12px;
+        scroll-snap-align: end;
+        
+      }
+   
+      .li_spam{
+        font-size: 14px; 
+      }
+
+    p{
+      text-align:center;
+      margin:5px;
     }
 
-      
-      li {
-        list-style-type: none;
-      }
-      
-      
-      .messages-container
-      .user {
-      border-radius: 5px;
-      text-align: right;
-      background-color:#B9E97C ;
-      font-size: 17px;
-    }
-    
-    .li_spam{
-      font-size: 14px;
-    }
-    
-    .messages-container
     .otroUser{
-      text-align: left;
-      border-radius: 5px;
       background-color:#D8D8D8 ;
       font-size: 17px;
+      overflow: hidden;
+      scroll-snap-align: end;
+      border-radius: 84px 84px 89px 2px;
+      text-align: end;
     }
+    /* El contenido se alinea a la izquierda */
+    .messages .li-container:has(.user) {
+      align-self: start;
+    }
+    /* El contenido se alinea a la derecha */
+    .messages .li-container:has(.otroUser) {
+      align-self: end;
+    }
+ 
     `;
         div.appendChild(style);
         this.innerHTML = ``;
         this.append(div);
+        const chatSecction = div.querySelector(".messages");
+        chatSecction.scroll({
+            top: 1000,
+            left: 0,
+            behavior: "auto"
+        });
         this.addLissteners();
     }
 }
@@ -3297,7 +3300,8 @@ const state = {
         this.data = newState;
         //console.log(newState);
         for (const cd of this.listeners)cd();
-        console.log("soy el statey e cambiado", newState);
+        localStorage.setItem("state", JSON.stringify(newState));
+        console.log("soy el state y e cambiado", this.data);
     },
     setEmail (email, name) {
         const currenstate = this.getState();
@@ -3319,19 +3323,21 @@ const state = {
                 name: nameFromState
             })
         }).then((res)=>{
-            if (!res.ok) throw new Error("Error al realizar la solicitud");
+            // if (res.ok) {
+            //   throw new Error("Error al realizar la solicitud");
+            // }
             const contentType = res.headers.get("content-type");
             if (contentType && contentType.includes("application/json")) return res.json();
             else throw new Error("La respuesta del servidor no es JSON");
         }).then((data)=>{
-            console.log(data);
+            // console.log(data);
             currentState.userId = data.id;
-            console.log(currentState.userId);
+            //  console.log(currentState.userId);
             this.setState(currentState);
         });
         else console.error("No hay un usuario en el state");
     },
-    singIn () {
+    singIn (email) {
         const currenstate = this.getState();
         const emailFromState = currenstate.email;
         console.log(emailFromState, "estes es el mail");
@@ -3363,10 +3369,10 @@ const state = {
             })
         }).then((res)=>res.json()).then((data)=>{
             currenstate.roomId = data.id;
-            console.log(data.id, "esta es la data desde ask");
+            //  console.log(data.id, "esta es la data desde ask");
             this.setState(currenstate);
             const roomIdEl = currenstate.roomId;
-            console.log("estes es el roomID", roomIdEl);
+            //console.log("estes es el roomID", roomIdEl);
             this.accessToRoom(roomIdEl);
         //  console.log("este es el currend desde el ask", currenstate);
         });
@@ -3409,7 +3415,7 @@ const state = {
     }
 };
 
-},{"./db":"98qAp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","lodash":"3qBDj"}],"98qAp":[function(require,module,exports) {
+},{"./db":"98qAp","lodash":"3qBDj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"98qAp":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 // const rtdb = firebase.firestore();
@@ -76038,6 +76044,7 @@ var global = arguments[3];
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "TitleChat", ()=>TitleChat);
+var _state = require("../../state");
 class TitleChat extends HTMLElement {
     constructor(){
         super();
@@ -76045,11 +76052,19 @@ class TitleChat extends HTMLElement {
     }
     render() {
         const div = document.createElement("div");
+        div.className = "container";
+        const data = (0, _state.state).getState().roomId;
         div.innerHTML = `
       <h1 class="title"> Bienvenido a el Chat </h1>
+      <h3> Esta es la sala ${(0, _state.state).getState().roomId} </h3>
       `;
         const style = document.createElement("style");
         style.innerHTML = `
+    .container{
+      display: flex;
+      flex-direction: column;
+    
+    }
       .title{
         font-size: 2rem;
         font-weight: 600;
@@ -76071,7 +76086,7 @@ class TitleChat extends HTMLElement {
 }
 customElements.define("title-chat", TitleChat);
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b3ICx":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../state":"1Yeju"}],"b3ICx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "FormWelcome", ()=>FormWelcome);
@@ -76089,7 +76104,6 @@ class FormWelcome extends HTMLElement {
             currenstate.name;
             currenstate.email;
             currenstate.userId;
-            this.render();
         });
         const form = this.querySelector(".form");
         // console.log(form, "este es el form");
@@ -76103,15 +76117,15 @@ class FormWelcome extends HTMLElement {
             (0, _state.state).setEmail(email, name);
             //   console.log(valorDeSala);
             const valorDeSala = target.sala.value;
+            //     console.log(typeof valorDeSala);
             if (valorDeSala == "") {
                 (0, _state.state).signup(email, name)?.then(()=>{
-                    (0, _state.state).singIn();
                     (0, _state.state).askNewRoom();
                 });
                 (0, _router.Router).go("/chat");
             } else if (valorDeSala != "") {
-                (0, _state.state).setEmail(email, name);
-                (0, _state.state).singIn()?.then(()=>(0, _state.state).accessToRoom(valorDeSala), (0, _state.state).getState());
+                (0, _state.state).singIn(email);
+                (0, _state.state).askNewRoom()?.then(()=>(0, _state.state).accessToRoom(valorDeSala), (0, _state.state).getState());
                 (0, _router.Router).go("/chat");
             }
             //      console.log(target.sala.value, "esto es el valor de sala");
@@ -76245,6 +76259,6 @@ class FormWelcome extends HTMLElement {
 }
 customElements.define("form-welcome", FormWelcome);
 
-},{"../../state":"1Yeju","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@vaadin/router":"kVZrF"}]},["3LmCz","h7u1C"], "h7u1C", "parcelRequire5774")
+},{"@vaadin/router":"kVZrF","../../state":"1Yeju","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["3LmCz","h7u1C"], "h7u1C", "parcelRequire5774")
 
 //# sourceMappingURL=index.b71e74eb.js.map

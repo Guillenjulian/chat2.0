@@ -14,8 +14,6 @@ export class FormWelcome extends HTMLElement {
       currenstate.name;
       currenstate.email;
       currenstate.userId;
-
-      this.render();
     });
     const form = this.querySelector(".form");
     // console.log(form, "este es el form");
@@ -33,20 +31,20 @@ export class FormWelcome extends HTMLElement {
       //   console.log(valorDeSala);
 
       const valorDeSala = target.sala.value;
+      //     console.log(typeof valorDeSala);
 
       if (valorDeSala == "") {
         state.signup(email, name)?.then(() => {
-          state.singIn();
           state.askNewRoom();
         });
 
         Router.go("/chat");
       } else if (valorDeSala != "") {
-        state.setEmail(email, name);
+        state.singIn(email);
         state
-          .singIn()
-
+          .askNewRoom()
           ?.then(() => state.accessToRoom(valorDeSala), state.getState());
+
         Router.go("/chat");
       }
 

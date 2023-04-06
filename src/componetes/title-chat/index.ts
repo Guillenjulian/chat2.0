@@ -7,11 +7,19 @@ export class TitleChat extends HTMLElement {
   }
   render() {
     const div = document.createElement("div");
+    div.className = "container";
+    const data = state.getState().roomId;
     div.innerHTML = `
       <h1 class="title"> Bienvenido a el Chat </h1>
+      <h3> Esta es la sala ${state.getState().roomId} </h3>
       `;
     const style = document.createElement("style");
     style.innerHTML = `
+    .container{
+      display: flex;
+      flex-direction: column;
+    
+    }
       .title{
         font-size: 2rem;
         font-weight: 600;

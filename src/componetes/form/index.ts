@@ -39,13 +39,14 @@ export class Header extends HTMLElement {
   messages: Message[] = [];
   render() {
     const div = document.createElement("div");
+
     //console.log("Eeste mensasge", this.messages);
 
-    div.className = "container";
+    div.className = "contenedor";
     div.innerHTML = `
     <div class = "messages">
-  <h1> Esta es la sala ${state.data.roomId}</hi
-    <div>
+
+    
     ${this.messages
       .map((m) => {
         let name = state.data.name;
@@ -57,68 +58,47 @@ export class Header extends HTMLElement {
           userName = "otroUser";
         }
 
-        return `  <div>
-        <li  class = "messages-container">
-        <div  class=" li_spam">${m.name}
-        </div>
-        
-        <div class ="${userName}">
-        <p> ${m.message}</p>
-        </div>
+        return `  
+        <div class ="li-container">
+        <spam class=" li_spam">${m.name} </spam>
+        <li  class ="${userName}">
+       <p>
+        ${m.message}
+       </p>
         
         </li>
+        
+        
+        </div>
         `;
       })
       .join("")}
-    </div>
+  
+
+      </div>
+      <div  >
       <form class= "submit-message">
-        <input class= "imput" type="text"  name="new-message"  ><br>
+      <input class= "imput" type="text"  name="new-message"  ><br>
       
-        <button class="button">Ingresar</button>
-        </form>
-        </div>
+      <button class="button">Ingresar</button>
+      </form>
+      
+      
+      </div>
+
       `;
     const style = document.createElement("style");
+
     style.innerHTML = `
 
-    .container {
+    .contenedor{
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 10px;
-      background-color: #f9f9f9;
+      flex-direction: column;
     }
-    
-    .messages {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      padding: 10px;
-      border-radius: 5px;
-      background-color: #ffffff;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-      height: 100%;
-      width:312px ;
-
-    }
-    
-    .message {
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 5px;
-      background-color: #d2f7c1;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    
-    .message strong {
-      font-weight: bold;
-    }
-    
+ 
     .submit-message {
-      height: 100%;
-
+      width: 150vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -128,25 +108,22 @@ export class Header extends HTMLElement {
       padding: 10px;
       border-radius: 5px;
       background-color: #ffffff;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+      
     }
     
-    
-
     .imput {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
+      width: 74vh;
+      padding: 5px;
       border-radius: 5px;
       background-color: #fff;
       font-size: 14px;
       line-height: 1.5;
     }
     
+
     .button {
-      width: 100%;
+      width: 77vh;
       padding: 10px;
-      margin-bottom: 10px;
       border: none;
       border-radius: 5px;
       background-color: #0077cc;
@@ -156,54 +133,83 @@ export class Header extends HTMLElement {
       cursor: pointer;
       transition: all 0.3s ease;
     }
+ 
     
-    @media (min-width: 768px) {
-      .container {
-        max-width: 768px;
-        margin: 0 auto;
-      }
+    .messages{
+      display: flex;
+      flex-direction: column;
+      border: solid 3px black;
+      width: 500px;
+      height: 250px;
+      margin: 10px;
+      margin-top: 10px;
+      overflow-y: scroll;
+      scroll-snap-align: end;
+  scroll-snap-type: y 
+      align-items: center; border-radius: 5px;
+      
     }
-    .messages-container{
+    
+      .li-container{
         display: flex;
         flex-direction: column;
-        height: 100%;
-        gap:7px;
+        border-radius: 100px 100px 100px 6px;
+        font-size: 17px;
+        list-style-type: none;
+        gap:10px;
+        margin:5px;
+        scroll-snap-align: end;
+        
       }
-    .messages-container strong{
-      font-weight: bold;
+  
+      .user {
+        background-color:#B9E97C ;
+        overflow: hidden;
+        border-radius: 12px;
+        scroll-snap-align: end;
+        
+      }
+   
+      .li_spam{
+        font-size: 14px; 
+      }
+
+    p{
+      text-align:center;
+      margin:5px;
     }
 
-      
-      li {
-        list-style-type: none;
-      }
-      
-      
-      .messages-container
-      .user {
-      border-radius: 5px;
-      text-align: right;
-      background-color:#B9E97C ;
-      font-size: 17px;
-    }
-    
-    .li_spam{
-      font-size: 14px;
-    }
-    
-    .messages-container
     .otroUser{
-      text-align: left;
-      border-radius: 5px;
       background-color:#D8D8D8 ;
       font-size: 17px;
+      overflow: hidden;
+      scroll-snap-align: end;
+      border-radius: 84px 84px 89px 2px;
+      text-align: end;
     }
+    /* El contenido se alinea a la izquierda */
+    .messages .li-container:has(.user) {
+      align-self: start;
+    }
+    /* El contenido se alinea a la derecha */
+    .messages .li-container:has(.otroUser) {
+      align-self: end;
+    }
+ 
     `;
 
     div.appendChild(style);
 
     this.innerHTML = ``;
     this.append(div);
+    const chatSecction = div.querySelector(".messages");
+
+    chatSecction.scroll({
+      top: 1000,
+      left: 0,
+      behavior: "auto",
+    });
+
     this.addLissteners();
   }
 }

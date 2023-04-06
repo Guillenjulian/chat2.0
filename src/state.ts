@@ -43,7 +43,8 @@ const state = {
     for (const cd of this.listeners) {
       cd();
     }
-    console.log("soy el statey e cambiado", newState);
+    localStorage.setItem("state", JSON.stringify(newState));
+    console.log("soy el state y e cambiado", this.data);
   },
 
   setEmail(email: string, name: string) {
@@ -55,8 +56,8 @@ const state = {
   },
   signup(email: string, name: string) {
     const currentState = this.getState();
-    const emailFromState = currentState.email;
-    const nameFromState = currentState.name;
+    const emailFromState = currentState.email as string;
+    const nameFromState = currentState.name as string;
 
     if (emailFromState && nameFromState) {
       return fetch(API_BASE_URL + "/signup", {
@@ -70,9 +71,9 @@ const state = {
         }),
       })
         .then((res) => {
-          if (!res.ok) {
-            throw new Error("Error al realizar la solicitud");
-          }
+          // if (res.ok) {
+          //   throw new Error("Error al realizar la solicitud");
+          // }
           const contentType = res.headers.get("content-type");
           if (contentType && contentType.includes("application/json")) {
             return res.json();
@@ -81,10 +82,10 @@ const state = {
           }
         })
         .then((data) => {
-          console.log(data);
+          // console.log(data);
 
           currentState.userId = data.id;
-          console.log(currentState.userId);
+          //  console.log(currentState.userId);
 
           this.setState(currentState);
         });
@@ -93,7 +94,7 @@ const state = {
     }
   },
 
-  singIn() {
+  singIn(email) {
     const currenstate = this.getState();
 
     const emailFromState = currenstate.email;
@@ -138,12 +139,12 @@ const state = {
         .then((res) => res.json())
         .then((data) => {
           currenstate.roomId = data.id;
-          console.log(data.id, "esta es la data desde ask");
+          //  console.log(data.id, "esta es la data desde ask");
 
           this.setState(currenstate);
 
           const roomIdEl = currenstate.roomId;
-          console.log("estes es el roomID", roomIdEl);
+          //console.log("estes es el roomID", roomIdEl);
 
           this.accessToRoom(roomIdEl);
 
@@ -154,7 +155,7 @@ const state = {
     }
   },
 
-  accessToRoom(roomId) {
+  accessToRoom(roomId?) {
     const currenstate = this.getState();
     const userId = currenstate.userId;
     // const roomId = currenstate.roomId;
