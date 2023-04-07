@@ -1,6 +1,10 @@
 import * as admin from "firebase-admin";
 import * as serviceAccount from "./key.json";
 
+const varEnv: any = process.env;
+
+console.log(varEnv.DB_URl, "ESTA ES LA VARIABLE DE ENTORNO");
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount as any),
   databaseURL: "https://apx-mod-6-julian-default-rtdb.firebaseio.com",
