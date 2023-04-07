@@ -8,7 +8,7 @@ const firebaseConfig: any = {
   type: varEnv.TIPE,
   project_id: varEnv.PROJECT_ID,
   private_key_id: varEnv.PRIVATE_KEY_ID,
-  private_key: varEnv.PRIVATE_KEY,
+  private_key: varEnv.PRIVATE_KEY?.replace(/\\n/g, "\n"),
   client_email: varEnv.CLIENT_EMAIL,
   client_id: varEnv.CLIENT_ID,
   auth_uri: varEnv.AUTH_URI,
