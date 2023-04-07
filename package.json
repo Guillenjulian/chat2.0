@@ -32,9 +32,9 @@
     "typescript": "^5.0.2"
   },
   "scripts": {
-    "dev:back": "nodemon --watch './back/main.ts' --exec 'ts-node back/main.ts'",
-    "dev": "parcel ./src/index.html",
-    "build": "parcel build index.html"
+    "dev": "nodemon --watch './back/main.ts' --exec 'ts-node back/main.ts'",
+    "start": "parcel ./src/index.html",
+    "build": "parcel build ./src/index.html"
   },
   "repository": "git@github.com:Guillenjulian/chat2.0.git",
   "author": "Guillen Julian <guillen.julian1985@gmail.com>"
