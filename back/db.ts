@@ -7,7 +7,7 @@ console.log(varEnv.DB_URl, "ESTA ES LA VARIABLE DE ENTORNO");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount as any),
-  databaseURL: "https://apx-mod-6-julian-default-rtdb.firebaseio.com",
+  databaseURL: varEnv.DB_URlvarEnv.DB_URl,
 });
 
 const db = admin.firestore();
