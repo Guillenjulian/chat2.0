@@ -1,5 +1,5 @@
 import * as admin from "firebase-admin";
-import * as serviceAccount from "./key.json";
+import * as serviceAccount from "../key.json";
 
 const varEnv: any = process.env;
 
@@ -7,7 +7,7 @@ console.log(varEnv.DB_URl, "ESTA ES LA VARIABLE DE ENTORNO");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount as any),
-  databaseURL: varEnv.DB_URlvarEnv.DB_URl,
+  databaseURL: varEnv.DB_URl,
 });
 
 const db = admin.firestore();

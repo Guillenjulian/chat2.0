@@ -8,6 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static("dist"));
 
 const userCol = db.collection("users");
 const roomCol = db.collection("rooms");
@@ -131,6 +132,10 @@ app.post("/messages", function (req, res) {
 
     res.json("todo ok");
   });
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/dist/index.html");
 });
 
 app.listen(port, () => {
