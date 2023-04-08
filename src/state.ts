@@ -155,7 +155,7 @@ const state = {
     }
   },
 
-  accessToRoom(roomId?) {
+  accessToRoom(roomId?: string) {
     const currenstate = this.getState();
     const userId = currenstate.userId;
     // const roomId = currenstate.roomId;

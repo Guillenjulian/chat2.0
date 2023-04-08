@@ -9,9 +9,11 @@ export class TitleChat extends HTMLElement {
     const div = document.createElement("div");
     div.className = "container";
     const data = state.getState().roomId;
+    console.log(data);
+
     div.innerHTML = `
       <h1 class="title"> Bienvenido a el Chat </h1>
-      <h3> Esta es la sala ${state.getState().roomId} </h3>
+      <h3> Esta es la sala ${data} </h3>
       `;
     const style = document.createElement("style");
     style.innerHTML = `

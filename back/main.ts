@@ -3,12 +3,11 @@ import { db, rtdb } from "./db";
 import * as cors from "cors";
 import { uuidv4 } from "@firebase/util";
 
-const port = process.env.PORT || 3000;
+const port = 3000 || process.env.PORT;
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static("dist"));
 
 const userCol = db.collection("users");
 const roomCol = db.collection("rooms");
@@ -134,8 +133,11 @@ app.post("/messages", function (req, res) {
   });
 });
 
+app.use(express.static("dist"));
+
 app.get("*", (req, res) => {
-  res.sendFile(__dirname + "/dist/index.html");
+  const ROOT_PATH = __dirname.replace("/back", "");
+  res.sendFile(ROOT_PATH);
 });
 
 app.listen(port, () => {

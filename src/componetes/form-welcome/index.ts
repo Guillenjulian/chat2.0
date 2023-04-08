@@ -30,8 +30,9 @@ export class FormWelcome extends HTMLElement {
 
       //   console.log(valorDeSala);
 
-      const valorDeSala = target.sala.value;
+      const valorDeSala = target.sala.value as any;
       //     console.log(typeof valorDeSala);
+      state.data.roomId == valorDeSala;
 
       if (valorDeSala == "") {
         state.signup(email, name)?.then(() => {
