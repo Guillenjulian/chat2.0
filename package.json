@@ -35,7 +35,7 @@
   "scripts": {
     "dev": "nodemon --watch './back/main.ts' --exec 'ts-node back/dev.ts'",
     "build:front": "parcel ./src/index.html",
-    "build:back": "tsc ./back/main.ts  ",
+    "build:back": "tsc ./back/main.ts  &&  tsc ./src/index.ts",
     "build": "yarn install &&  yarn build:back",
     "start": "node index.js"
   },
