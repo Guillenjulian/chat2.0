@@ -36,7 +36,7 @@
     "dev": "nodemon --watch './back/main.ts' --exec 'ts-node back/dev.ts'",
     "build:front": "parcel ./src/index.html",
     "build:back": "tsc ./back/main.ts  ",
-    "build": "yarn install && yarn build:front && yarn build:back",
+    "build": "yarn build:front && yarn build:back",
     "start": "node index.js"
   },
   "repository": "git@github.com:Guillenjulian/chat2.0.git",
